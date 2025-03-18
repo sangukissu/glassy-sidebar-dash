@@ -9,6 +9,7 @@ type SidebarContextType = {
   isMobile: boolean;
   mobileOpen: boolean;
   toggleMobileMenu: () => void;
+  closeMobileMenu: () => void;
 };
 
 const SidebarContext = createContext<SidebarContextType | undefined>(undefined);
@@ -18,6 +19,7 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const [expanded, setExpanded] = useState(!isMobile);
   const [mobileOpen, setMobileOpen] = useState(false);
 
+  // Adjust sidebar state when screen size changes
   useEffect(() => {
     setExpanded(!isMobile);
     if (isMobile) {
@@ -32,6 +34,25 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
   const toggleMobileMenu = () => {
     setMobileOpen(!mobileOpen);
   };
+  
+  const closeMobileMenu = () => {
+    setMobileOpen(false);
+  };
+
+  // Close mobile menu when escape key is pressed
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && mobileOpen) {
+        closeMobileMenu();
+      }
+    };
+
+    window.addEventListener('keydown', handleKeyDown);
+    
+    return () => {
+      window.removeEventListener('keydown', handleKeyDown);
+    };
+  }, [mobileOpen]);
 
   return (
     <SidebarContext.Provider value={{ 
@@ -40,7 +61,8 @@ export function SidebarProvider({ children }: { children: React.ReactNode }) {
       setExpanded, 
       isMobile,
       mobileOpen,
-      toggleMobileMenu
+      toggleMobileMenu,
+      closeMobileMenu
     }}>
       {children}
     </SidebarContext.Provider>

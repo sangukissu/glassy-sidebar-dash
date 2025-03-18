@@ -30,7 +30,8 @@ const NavItem = ({ icon, label, active, isNew, expanded, onClick, to = '#' }: Na
         {icon}
       </div>
       
-      {expanded && (
+      {/* Always show label on mobile when menu is open, or on desktop when expanded */}
+      {(expanded) && (
         <span className={cn('nav-label whitespace-nowrap', active ? 'text-white' : 'text-gray-400')}>
           {label}
         </span>
@@ -49,6 +50,10 @@ export default function Sidebar() {
   
   const handleNavItemClick = (item: string) => {
     setActiveItem(item);
+    if (isMobile) {
+      // Optionally close the sidebar on mobile after clicking an item
+      // toggleMobileMenu();
+    }
   };
   
   if (isMobile && !mobileOpen) {
@@ -90,7 +95,7 @@ export default function Sidebar() {
             icon={<LayoutDashboard size={20} />} 
             label="Dashboard" 
             active={activeItem === 'dashboard'} 
-            expanded={expanded}
+            expanded={expanded || (isMobile && mobileOpen)}
             onClick={() => handleNavItemClick('dashboard')}
             to="/"
           />
@@ -98,7 +103,7 @@ export default function Sidebar() {
             icon={<Image size={20} />} 
             label="My Gallery" 
             active={activeItem === 'gallery'} 
-            expanded={expanded}
+            expanded={expanded || (isMobile && mobileOpen)}
             onClick={() => handleNavItemClick('gallery')}
             to="/gallery"
           />
@@ -106,7 +111,7 @@ export default function Sidebar() {
             icon={<Wand2 size={20} />} 
             label="AI Tools" 
             active={activeItem === 'ai-tools'} 
-            expanded={expanded}
+            expanded={expanded || (isMobile && mobileOpen)}
             onClick={() => handleNavItemClick('ai-tools')}
             to="/ai-tools"
           />
@@ -114,7 +119,7 @@ export default function Sidebar() {
             icon={<Layers size={20} />} 
             label="Templates" 
             active={activeItem === 'templates'} 
-            expanded={expanded}
+            expanded={expanded || (isMobile && mobileOpen)}
             onClick={() => handleNavItemClick('templates')}
             to="/templates"
           />
@@ -122,7 +127,7 @@ export default function Sidebar() {
             icon={<Plus size={20} />} 
             label="Create New" 
             active={activeItem === 'create'} 
-            expanded={expanded}
+            expanded={expanded || (isMobile && mobileOpen)}
             onClick={() => handleNavItemClick('create')}
             to="/create"
           />
@@ -134,7 +139,7 @@ export default function Sidebar() {
             icon={<Package size={20} />} 
             label="Extensions" 
             active={activeItem === 'extensions'} 
-            expanded={expanded}
+            expanded={expanded || (isMobile && mobileOpen)}
             onClick={() => handleNavItemClick('extensions')}
             to="/extensions"
           />
@@ -142,7 +147,7 @@ export default function Sidebar() {
             icon={<Download size={20} />} 
             label="Downloads" 
             active={activeItem === 'downloads'} 
-            expanded={expanded}
+            expanded={expanded || (isMobile && mobileOpen)}
             isNew={true}
             onClick={() => handleNavItemClick('downloads')}
             to="/downloads"
@@ -151,7 +156,7 @@ export default function Sidebar() {
             icon={<Settings size={20} />} 
             label="Settings" 
             active={activeItem === 'settings'} 
-            expanded={expanded}
+            expanded={expanded || (isMobile && mobileOpen)}
             onClick={() => handleNavItemClick('settings')}
             to="/settings"
           />
@@ -160,13 +165,13 @@ export default function Sidebar() {
         {/* User Profile */}
         <div className={cn(
           'border-t border-white/10 p-4', 
-          expanded ? 'flex items-center' : 'flex flex-col items-center'
+          expanded || (isMobile && mobileOpen) ? 'flex items-center' : 'flex flex-col items-center'
         )}>
           <div className="w-8 h-8 rounded-full bg-gradient-to-r from-neon-blue to-neon-green flex items-center justify-center">
             <span className="text-xs font-bold">JD</span>
           </div>
           
-          {expanded && (
+          {(expanded || (isMobile && mobileOpen)) && (
             <div className="ml-3">
               <p className="text-sm font-medium">John Doe</p>
               <p className="text-xs text-gray-400">Pro Account</p>

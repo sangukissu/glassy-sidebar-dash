@@ -4,6 +4,8 @@ import Sidebar from './Sidebar';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { cn } from '@/lib/utils';
 import { Menu } from 'lucide-react';
+import ProfileDropdown from './ProfileDropdown';
+import CreditsDisplay from './CreditsDisplay';
 
 interface DashboardLayoutProps {
   children: React.ReactNode;
@@ -19,18 +21,25 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         'flex flex-col flex-grow transition-all duration-300 ease-out',
         !isMobile && expanded ? 'ml-[var(--sidebar-width)]' : !isMobile ? 'ml-[var(--sidebar-collapsed-width)]' : 'ml-0'
       )}>
-        {/* Header with mobile menu toggle */}
-        <header className="h-16 backdrop-blur-xl bg-black/40 border-b border-white/5 flex items-center px-4 sticky top-0 z-40">
-          {isMobile && (
-            <button 
-              onClick={toggleMobileMenu}
-              className="mr-4 p-2 hover:bg-white/5 rounded-md transition-colors"
-              aria-label="Toggle Menu"
-            >
-              <Menu size={24} />
-            </button>
-          )}
-          <h1 className="text-xl font-bold text-gradient">AI Image Editor</h1>
+        {/* Header with mobile menu toggle and user profile */}
+        <header className="h-16 backdrop-blur-xl bg-black/40 border-b border-white/5 flex items-center justify-between px-4 sticky top-0 z-40">
+          <div className="flex items-center">
+            {isMobile && (
+              <button 
+                onClick={toggleMobileMenu}
+                className="mr-4 p-2 hover:bg-white/5 rounded-md transition-colors"
+                aria-label="Toggle Menu"
+              >
+                <Menu size={24} />
+              </button>
+            )}
+            <h1 className="text-xl font-bold text-gradient">AI Image Editor</h1>
+          </div>
+          
+          <div className="flex items-center gap-4">
+            <CreditsDisplay />
+            <ProfileDropdown />
+          </div>
         </header>
         
         <main className="p-6 flex-grow">
@@ -41,7 +50,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
       {/* Mobile overlay when sidebar is open */}
       {isMobile && mobileOpen && (
         <div 
-          className="fixed inset-0 bg-black/60 z-40"
+          className="fixed inset-0 bg-black/60 z-40 backdrop-blur-sm transition-opacity duration-300"
           onClick={toggleMobileMenu}
           aria-hidden="true"
         />
