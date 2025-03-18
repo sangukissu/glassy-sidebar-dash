@@ -5,6 +5,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider } from "@/contexts/SidebarContext";
+import DashboardLayout from "@/components/DashboardLayout";
 
 import Index from "./pages/Index";
 import Gallery from "./pages/Gallery";
@@ -26,14 +27,14 @@ const App = () => (
       <SidebarProvider>
         <BrowserRouter>
           <Routes>
-            <Route path="/" element={<Index />} />
-            <Route path="/gallery" element={<Gallery />} />
-            <Route path="/ai-tools" element={<AITools />} />
-            <Route path="/templates" element={<Templates />} />
-            <Route path="/create" element={<Create />} />
-            <Route path="/extensions" element={<Extensions />} />
-            <Route path="/downloads" element={<Downloads />} />
-            <Route path="/settings" element={<Settings />} />
+            <Route path="/" element={<DashboardLayout><Index /></DashboardLayout>} />
+            <Route path="/gallery" element={<DashboardLayout><Gallery /></DashboardLayout>} />
+            <Route path="/ai-tools" element={<DashboardLayout><AITools /></DashboardLayout>} />
+            <Route path="/templates" element={<DashboardLayout><Templates /></DashboardLayout>} />
+            <Route path="/create" element={<DashboardLayout><Create /></DashboardLayout>} />
+            <Route path="/extensions" element={<DashboardLayout><Extensions /></DashboardLayout>} />
+            <Route path="/downloads" element={<DashboardLayout><Downloads /></DashboardLayout>} />
+            <Route path="/settings" element={<DashboardLayout><Settings /></DashboardLayout>} />
             <Route path="*" element={<NotFound />} />
           </Routes>
         </BrowserRouter>
