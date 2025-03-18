@@ -34,8 +34,8 @@
 
     --radius: 0.75rem;
 
-    --sidebar-width: 16rem;
-    --sidebar-collapsed-width: 5rem;
+    --sidebar-width: 240px;
+    --sidebar-collapsed-width: 72px;
     --sidebar-background: 0 0% 98%;
     --sidebar-foreground: 240 5.3% 26.1%;
     --sidebar-primary: 240 5.9% 10%;
