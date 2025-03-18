@@ -28,7 +28,6 @@ const NavItem = ({ icon, label, active, isNew, expanded, onClick, to = '#' }: Na
     >
       <div className="w-6 h-6 flex items-center justify-center relative">
         {icon}
-        <div className="absolute inset-0 bg-gradient-to-br from-neon-blue to-neon-green opacity-0 rounded-full blur-xl group-hover:opacity-20 transition-opacity duration-300"></div>
       </div>
       
       {expanded && (
@@ -45,15 +44,24 @@ const NavItem = ({ icon, label, active, isNew, expanded, onClick, to = '#' }: Na
 };
 
 export default function Sidebar() {
-  const { expanded, toggleSidebar } = useSidebar();
+  const { expanded, toggleSidebar, isMobile, mobileOpen } = useSidebar();
   const [activeItem, setActiveItem] = useState('dashboard');
   
   const handleNavItemClick = (item: string) => {
     setActiveItem(item);
   };
   
+  if (isMobile && !mobileOpen) {
+    return null;
+  }
+  
   return (
-    <aside className={cn('sidebar', expanded ? 'sidebar-expanded' : 'sidebar-collapsed')}>
+    <aside className={cn(
+      'sidebar',
+      expanded ? 'sidebar-expanded' : 'sidebar-collapsed',
+      isMobile ? 'mobile-sidebar' : '',
+      isMobile && 'z-50 fixed'
+    )}>
       <div className="flex flex-col h-full">
         {/* Logo and toggle */}
         <div className="p-4 flex items-center justify-between">
@@ -65,13 +73,15 @@ export default function Sidebar() {
             </div>
           )}
           
-          <button 
-            onClick={toggleSidebar}
-            className="sidebar-trigger"
-            aria-label={expanded ? 'Collapse Sidebar' : 'Expand Sidebar'}
-          >
-            {expanded ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
-          </button>
+          {!isMobile && (
+            <button 
+              onClick={toggleSidebar}
+              className="sidebar-trigger"
+              aria-label={expanded ? 'Collapse Sidebar' : 'Expand Sidebar'}
+            >
+              {expanded ? <ChevronLeft size={16} /> : <ChevronRight size={16} />}
+            </button>
+          )}
         </div>
         
         {/* Navigation */}
