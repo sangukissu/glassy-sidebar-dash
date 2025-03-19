@@ -22,27 +22,27 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         !isMobile && expanded ? 'ml-[var(--sidebar-width)]' : !isMobile ? 'ml-[var(--sidebar-collapsed-width)]' : 'ml-0'
       )}>
         {/* Header with mobile menu toggle and user profile */}
-        <header className="h-16 backdrop-blur-xl bg-black/40 border-b border-white/5 flex items-center justify-between px-4 sticky top-0 z-40">
+        <header className="h-16 backdrop-blur-xl bg-black/40 border-b border-white/5 flex items-center justify-between px-2 sm:px-4 sticky top-0 z-40">
           <div className="flex items-center">
             {isMobile && (
               <button 
                 onClick={toggleMobileMenu}
-                className="mr-4 p-2 hover:bg-white/5 rounded-md transition-colors"
+                className="mr-2 p-1.5 hover:bg-white/5 rounded-md transition-colors"
                 aria-label="Toggle Menu"
               >
-                <Menu size={24} />
+                <Menu size={20} />
               </button>
             )}
-            <h1 className="text-xl font-bold text-gradient">AI Image Editor</h1>
+            <h1 className="text-lg sm:text-xl font-bold text-gradient truncate">AI Image Editor</h1>
           </div>
           
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 sm:gap-4">
             <CreditsDisplay />
             <ProfileDropdown />
           </div>
         </header>
         
-        <main className="p-6 flex-grow">
+        <main className="p-4 sm:p-6 flex-grow">
           {children}
         </main>
       </div>
