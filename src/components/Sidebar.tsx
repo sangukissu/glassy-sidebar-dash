@@ -75,15 +75,15 @@ export default function Sidebar() {
   
   return (
     <aside className={cn(
-      'sidebar fixed z-50 h-full bg-black/90 backdrop-blur-xl border-r border-white/5',
-      expanded ? 'w-[var(--sidebar-width)]' : 'w-[var(--sidebar-collapsed-width)]',
+      'fixed z-50 h-full bg-black/90 backdrop-blur-xl border-r border-white/5',
+      isMobile ? 'w-[var(--sidebar-mobile-width)]' : expanded ? 'w-[var(--sidebar-width)]' : 'w-[var(--sidebar-collapsed-width)]',
       isMobile ? 'transition-transform ease-out duration-300' : 'transition-all duration-300',
       isMobile && !mobileOpen ? '-translate-x-full' : 'translate-x-0'
     )}>
       <div className="flex flex-col h-full">
         {/* Logo and toggle */}
         <div className="p-4 flex items-center justify-between">
-          {expanded ? (
+          {(expanded || isMobile) ? (
             <h1 className="text-xl font-bold text-gradient">AI Image Editor</h1>
           ) : (
             <div className="w-6 h-6 mx-auto">
@@ -108,7 +108,7 @@ export default function Sidebar() {
             icon={<LayoutDashboard size={20} />} 
             label="Dashboard" 
             active={activeItem === 'dashboard'} 
-            expanded={expanded || (isMobile && mobileOpen)}
+            expanded={expanded || isMobile}
             onClick={() => handleNavItemClick('dashboard')}
             to="/"
           />
@@ -116,7 +116,7 @@ export default function Sidebar() {
             icon={<Image size={20} />} 
             label="My Gallery" 
             active={activeItem === 'gallery'} 
-            expanded={expanded || (isMobile && mobileOpen)}
+            expanded={expanded || isMobile}
             onClick={() => handleNavItemClick('gallery')}
             to="/gallery"
           />
@@ -124,7 +124,7 @@ export default function Sidebar() {
             icon={<Wand2 size={20} />} 
             label="AI Tools" 
             active={activeItem === 'ai-tools'} 
-            expanded={expanded || (isMobile && mobileOpen)}
+            expanded={expanded || isMobile}
             onClick={() => handleNavItemClick('ai-tools')}
             to="/ai-tools"
           />
@@ -132,7 +132,7 @@ export default function Sidebar() {
             icon={<Layers size={20} />} 
             label="Templates" 
             active={activeItem === 'templates'} 
-            expanded={expanded || (isMobile && mobileOpen)}
+            expanded={expanded || isMobile}
             onClick={() => handleNavItemClick('templates')}
             to="/templates"
           />
@@ -140,7 +140,7 @@ export default function Sidebar() {
             icon={<Plus size={20} />} 
             label="Create New" 
             active={activeItem === 'create'} 
-            expanded={expanded || (isMobile && mobileOpen)}
+            expanded={expanded || isMobile}
             onClick={() => handleNavItemClick('create')}
             to="/create"
           />
@@ -152,7 +152,7 @@ export default function Sidebar() {
             icon={<Package size={20} />} 
             label="Extensions" 
             active={activeItem === 'extensions'} 
-            expanded={expanded || (isMobile && mobileOpen)}
+            expanded={expanded || isMobile}
             onClick={() => handleNavItemClick('extensions')}
             to="/extensions"
           />
@@ -160,7 +160,7 @@ export default function Sidebar() {
             icon={<Download size={20} />} 
             label="Downloads" 
             active={activeItem === 'downloads'} 
-            expanded={expanded || (isMobile && mobileOpen)}
+            expanded={expanded || isMobile}
             isNew={true}
             onClick={() => handleNavItemClick('downloads')}
             to="/downloads"
@@ -169,7 +169,7 @@ export default function Sidebar() {
             icon={<Settings size={20} />} 
             label="Settings" 
             active={activeItem === 'settings'} 
-            expanded={expanded || (isMobile && mobileOpen)}
+            expanded={expanded || isMobile}
             onClick={() => handleNavItemClick('settings')}
             to="/settings"
           />
@@ -178,13 +178,13 @@ export default function Sidebar() {
         {/* User Profile */}
         <div className={cn(
           'border-t border-white/10 p-4', 
-          expanded || (isMobile && mobileOpen) ? 'flex items-center' : 'flex flex-col items-center'
+          expanded || isMobile ? 'flex items-center' : 'flex flex-col items-center'
         )}>
           <div className="w-8 h-8 rounded-full bg-gradient-to-r from-neon-blue to-neon-green flex items-center justify-center">
             <span className="text-xs font-bold">JD</span>
           </div>
           
-          {(expanded || (isMobile && mobileOpen)) && (
+          {(expanded || isMobile) && (
             <div className="ml-3">
               <p className="text-sm font-medium">John Doe</p>
               <p className="text-xs text-gray-400">Pro Account</p>
