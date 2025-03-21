@@ -7,7 +7,8 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { SidebarProvider } from "@/contexts/SidebarContext";
 import DashboardLayout from "@/components/DashboardLayout";
 
-import Index from "./pages/Index";
+import Landing from "./pages/Landing";
+import Dashboard from "./pages/Dashboard";
 import Gallery from "./pages/Gallery";
 import AITools from "./pages/AITools";
 import Templates from "./pages/Templates";
@@ -27,7 +28,11 @@ const App = () => (
           <Toaster />
           <Sonner />
           <Routes>
-            <Route path="/" element={<DashboardLayout><Index /></DashboardLayout>} />
+            {/* Landing page */}
+            <Route path="/" element={<Landing />} />
+            
+            {/* Dashboard and protected routes */}
+            <Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
             <Route path="/gallery" element={<DashboardLayout><Gallery /></DashboardLayout>} />
             <Route path="/ai-tools" element={<DashboardLayout><AITools /></DashboardLayout>} />
             <Route path="/templates" element={<DashboardLayout><Templates /></DashboardLayout>} />
