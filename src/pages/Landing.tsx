@@ -11,10 +11,17 @@ import HowItWorks from '@/components/HowItWorks';
 import Testimonials from '@/components/Testimonials';
 import FAQ from '@/components/FAQ';
 import Footer from '@/components/Footer';
+import CursorEffect from '@/components/CursorEffect';
 
 export default function Landing() {
   return (
     <div className="min-h-screen bg-gradient-to-b from-black to-gray-900 text-white">
+      {/* Custom cursor effect only for the landing page */}
+      <CursorEffect />
+      
+      {/* Noise overlay */}
+      <div className="noise-overlay"></div>
+      
       {/* Navigation */}
       <header className="backdrop-blur-sm bg-black/30 border-b border-white/10 fixed w-full z-50">
         <div className="container mx-auto px-4 py-4 flex items-center justify-between">
