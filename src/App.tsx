@@ -32,14 +32,16 @@ const App = () => (
             <Route path="/" element={<Landing />} />
             
             {/* Dashboard and protected routes */}
-            <Route path="/dashboard" element={<DashboardLayout><Dashboard /></DashboardLayout>} />
-            <Route path="/gallery" element={<DashboardLayout><Gallery /></DashboardLayout>} />
-            <Route path="/ai-tools" element={<DashboardLayout><AITools /></DashboardLayout>} />
-            <Route path="/templates" element={<DashboardLayout><Templates /></DashboardLayout>} />
-            <Route path="/create" element={<DashboardLayout><Create /></DashboardLayout>} />
-            <Route path="/extensions" element={<DashboardLayout><Extensions /></DashboardLayout>} />
-            <Route path="/downloads" element={<DashboardLayout><Downloads /></DashboardLayout>} />
-            <Route path="/settings" element={<DashboardLayout><Settings /></DashboardLayout>} />
+            <Route element={<DashboardLayout />}>
+              <Route path="/dashboard" element={<Dashboard />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/ai-tools" element={<AITools />} />
+              <Route path="/templates" element={<Templates />} />
+              <Route path="/create" element={<Create />} />
+              <Route path="/extensions" element={<Extensions />} />
+              <Route path="/downloads" element={<Downloads />} />
+              <Route path="/settings" element={<Settings />} />
+            </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>
         </SidebarProvider>

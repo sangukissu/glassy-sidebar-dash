@@ -1,5 +1,6 @@
 
 import React from 'react';
+import { Outlet } from 'react-router-dom';
 import Sidebar from './Sidebar';
 import { useSidebar } from '@/contexts/SidebarContext';
 import { cn } from '@/lib/utils';
@@ -7,11 +8,7 @@ import { Menu } from 'lucide-react';
 import ProfileDropdown from './ProfileDropdown';
 import CreditsDisplay from './CreditsDisplay';
 
-interface DashboardLayoutProps {
-  children: React.ReactNode;
-}
-
-export default function DashboardLayout({ children }: DashboardLayoutProps) {
+export default function DashboardLayout() {
   const { expanded, isMobile, mobileOpen, toggleMobileMenu } = useSidebar();
 
   return (
@@ -43,7 +40,7 @@ export default function DashboardLayout({ children }: DashboardLayoutProps) {
         </header>
         
         <main className="p-4 sm:p-6 flex-grow">
-          {children}
+          <Outlet />
         </main>
       </div>
       
